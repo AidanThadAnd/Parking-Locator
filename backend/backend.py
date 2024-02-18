@@ -128,6 +128,13 @@ def compare_distances(userCoords, tuplesList):
         distanceFromUserList.append(convert_coord_km(lat=lat, long=long))
     return distanceFromUserList
 
+# filters dataframe based on distanceList got from compare_distances method and a desired distance filter
+def filter_df_distance(df, distanceList, desiredDistance):
+    for i in range(len(distanceList)):
+        if distanceList[i] > desiredDistance:
+            df.drop(index=i, inplace=True)
+    return df
+
 if __name__ == '__main__':
     app.run()
 
