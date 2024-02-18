@@ -9,8 +9,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center; /* Center content vertically */
-  height: 140vh;
-  
+  height: 100vh;
+
   background-image: url('source/background.png');
   background-size: cover; /* Cover the entire container */
   background-position: center; /* Center the background */
@@ -22,12 +22,12 @@ body {
 }
 
 .title {
-  font-size: 36px;
+  font-size: 28px; /* Adjusted font size */
   margin-bottom: 10px;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 14px; /* Adjusted font size */
   color: gray;
 }
 
@@ -40,27 +40,27 @@ body {
 }
 
 .map {
-  width: 334px;
-  height: 334px;
+  width: 280px; /* Adjusted width */
+  height: 280px; /* Adjusted height */
   border: 1px solid black;
 }
 
 .button-container {
-  margin-top: 50px; /* Decreased margin */
+  margin-top: 40px; /* Decreased margin */
   display: flex; /* Display buttons horizontally */
   flex-direction: column; /* Stack buttons vertically */
   align-items: center;
-  width: 250px; /* Adjusted width */
+  width: 200px; /* Adjusted width */
 }
 
 .primary-button {
   width: 100%; /* Adjusted button width */
-  height: 60px; /* Decreased button height */
+  height: 48px; /* Decreased button height */
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 16px; /* Adjusted font size */
   cursor: pointer;
 }
