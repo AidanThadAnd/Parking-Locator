@@ -19,15 +19,36 @@ def read_data_from_csv(filename):
     return dataFrame
 
 # Hopefully brings everything together once front end data is passed.
-def important_method(desiredLength, desiredDistance, payment, ovnight):
+def important_method(desiredTime, desiredDistance, payment, ovnight, userAddress):
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
+    userCoords = get_address_coords(userAddress)
 
     res_filter_useless_restrictions(resDF)
     ons_filter_non_parking_zones(onsDF)
 
-    res_filter_parking_restrictions(resDF, desiredLength)
+    res_filter_parking_restrictions(resDF, desiredTime)
+    ons_filter_parking_times(onsDF, desiredTime)
+    if payment == True:
+        filter_payment_required(resDF, onsDF)
+    if ovnight == True:
+        filter_overnight_parking(resDF)
+
+    resFloatCoords = get_float_coords(resDF)
+    onsFloatCoords = get_float_coords(onsDF)
+    resTuples = avg_lat_long(resFloatCoords)
+    onsTuples = avg_lat_long(onsFloatCoords)
+    resDistList = compare_distances(userCoords=userCoords, tuplesList=resTuples)
+    onsDistList = compare_distances(userCoords=userCoords, tuplesList=onsTuples)
+    filter_df_distance(resDF, resDistList, desiredDistance)
+    filter_df_distance(onsDF, onsDistList, desiredDistance)
     return
+
+def filter_overnight_parking(dataFrame):
+    for x in dataFrame.index:
+            if dataFrame.loc[x,"PARKING_RESTRICTION"] != 'NONE':
+                dataFrame.drop(x, inplace = True)
+    return dataFrame
 
 # filter useless restrictions
 def res_filter_useless_restrictions(dataFrame):
@@ -42,6 +63,13 @@ def ons_filter_parking_times(dataFrame, desiredRestriction):
         if dataFrame.loc[x, "MAX_TIME"] < desiredRestriction:
             dataFrame.drop(x, inplace = True)
     return dataFrame
+
+def filter_payment_required(resDataFrame, onsDataFrame):
+    res_filter_parking_restrictions(resDataFrame, 'Payment Required')
+    for x in onsDataFrame.index:
+        if onsDataFrame.loc[x, "PRICE_ZONE"] != '':
+            onsDataFrame.drop(x, inplace = True)
+    return resDataFrame, onsDataFrame
 
 # converts lat and long into km
 def convert_coord_km(lat, long):
