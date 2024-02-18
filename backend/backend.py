@@ -16,6 +16,9 @@ def home():
 def read_data_from_csv(filename):
     # Logic to read data from CSV
     dataFrame = pd.read_csv(filename)
+    for x in dataFrame.index:
+        if dataFrame.loc[x,"PARKING_RESTRICTION"] == 'Permit Required':
+            dataFrame.drop(x, inplace = True)
     return dataFrame
 
 # converts lat and long into km
@@ -25,7 +28,8 @@ def convert_coord_km(lat, long):
 # Filters the dataFrame by a desired parking restriction in the csv
 def filter_parking_restrictions(dataFrame, desiredRestriction):
     for x in dataFrame.index:
-        if dataFrame.loc[x,"PARKING_RESTRICTION"] != desiredRestriction:
+        j = dataFrame.loc[x,"PARKING_RESTRICTION"]
+        if j < desiredRestriction and j != 'NONE':
             dataFrame.drop(x, inplace = True)
     return dataFrame
 
