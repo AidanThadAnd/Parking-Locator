@@ -43,36 +43,16 @@
                 </style>
             
             <script>
+                
                 var map = L.map('map').setView([51.044, -114.0719], 13);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
             
                 // Function to update the map with new coordinates
-        //     function updateMap() {
-        //     // Fetch the updated coordinates from the Flask route
-        //     fetch('/api/get_coordinates')
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // Assume the coordinates are in the format [lat1, lon1, lat2, lon2, ...]
-        //             var updatedCoordinates = data.coordinates;
 
-        //             // Clear existing markers
-        //             map.eachLayer(function (layer) {
-        //                 if (layer instanceof L.Marker) {
-        //                     map.removeLayer(layer);
-        //                 }
-        //             });
-
-        //             // Add new markers based on the updated coordinates
-        //             for (var i = 0; i < updatedCoordinates.length; i += 2) {
-        //                 var marker = L.marker([updatedCoordinates[i], updatedCoordinates[i + 1]])
-        //                     .addTo(map);
-        //             }
-        //         });
-        // }
         
 
-        // Call the updateMap function initially or based on user actions
-        // updateMap();
+         //Call the updateMap function initially or based on user actions
+
             L.marker([51.044, -114.0719]).addTo(map)
                 .bindPopup('Yeh')
                 .openPopup();
@@ -89,7 +69,7 @@
             </script>
                             <div class="search-container">
                                 <input type="text" id="searchInput" placeholder="Search...">
-                                <button id="searchButton" onclick="retrieveParking('address_value', 'paid_parking_value', 'max_parking_time_value', 'walking_time_value')" >Search</button>
+                                <button id="searchButton" onclick="handleSearch(); retrieveParking('address_value', 'paid_parking_value', 'max_parking_time_value', 'walking_time_value')" >Search</button>
                               <div id="searchResults"></div>
         </div>
         </div>

@@ -12,17 +12,19 @@ CORS(app)
 @app.route('/get_coordinates', methods=['POST'])
 def get_coordinates():
     data = request.json
-    userAddress = data.get('address')
-    payment = data.get('paidParkingValue')
-    desiredTime = data.get('maxParkingTimeValue')
-    desiredDistance = data.get('walkingTimeValue')
-    
-    print("Did you get here?")
+    userAddress = data.get('addressJSON')
+    payment = data.get('paidParkingValueJSON')
+    desiredTime = data.get('maxParkingTimeValueJSON')
+    desiredDistance = data.get('walkingTimeValueJSON')
+
+
+    print(userAddress, payment, desiredTime, desiredDistance)
 
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
     # userCoords = get_address_coords(userAddress)
     res_filter_useless_restrictions(resDF)
+
 
 
     onsDF, resDF = important_method(desiredTime, desiredDistance, payment, False, userAddress) #how to get params?
