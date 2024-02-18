@@ -73,7 +73,7 @@ body {
 
 .primary-button {
   width: 316px;
-  height: 60px;
+  height: 88px;
   background-color: #559C71;
   color: black;
   font-weight: bold;
@@ -99,6 +99,11 @@ body {
   border: 2px solid black;
   border-radius:10px;
 }
+
+.button-container .primary-button span {
+  font-size: 12px; /* Adjust the font size as needed */
+}
+
 
 .close-button-container {
   position: absolute;
