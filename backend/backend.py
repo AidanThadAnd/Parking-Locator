@@ -40,6 +40,24 @@ def get_address_coords(address):
         if type(x) is dict:
             return x.get('coordinates')
 
+# Parses the dataframe for coords and returns a list of lists containing floats for further analysis
+def get_float_coords(dataFrame):
+    coordsList = []
+    for string in resDF.loc[:, "line"]:
+        getvals = []
+        for val in string:
+            if val.isdigit() or val.isspace() or val == '.':
+                getvals.append(val)
+        result = "".join(getvals)
+        result = result.strip()
+        list2 = result.split(" ")
+        listnum = []
+        for s in list2:
+            z = float(s)
+            listnum.append(z)
+        coordsList.append(listnum)
+    return coordsList
+
 if __name__ == '__main__':
     app.run()
 
