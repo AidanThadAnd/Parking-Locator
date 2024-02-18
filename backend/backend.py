@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import requests
 from flask_cors import CORS
-
+import datetime
+import re
 
 app = Flask(__name__)
 
@@ -182,6 +183,7 @@ def filter_df_distance(df, distanceList, desiredDistance):
 if __name__ == '__main__':
     app.run()
 
+#Filters dataframes based on user time and day
 def time_restriction_filter(dataframe):
     # Get current user time and day
     current_time = datetime.datetime.now().strftime("%H%M")
