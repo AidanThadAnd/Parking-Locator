@@ -2,7 +2,15 @@
 module.exports = {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "button-color": "#559C71",
+        "filter-color": "#54B262",
+      }
+    },
+    fontFamily: {
+      KantumruyPro: ["Kantumruy Pro"],
+    }, 
   },
   plugins: [],
 }

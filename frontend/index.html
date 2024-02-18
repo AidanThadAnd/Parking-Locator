@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./public/output.css"
-    <title>Hello world!</title>
+    <link rel="stylesheet" href="./public/output.css"> <!-- Make sure this path is correct -->
+
+    <title>bals</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="font-KantumruyPro grid place-content-center min-h-screen">
+    <div class="flex flex-col max-w-[390px] shadow-md rounded-md">
+        <img 
+        src="./src/assets/background.png" 
+        alt="background" 
+        class="max-h-844 object-cover rounded-t-md"/>
+        <div class="p-4">
+            <h1 class="text-xl mb-1">Park Freezy</h1>
+            <h2 class="text-sm mb-4 text-black">The Free and Easy Parking Solution</h2>
+            
+            <p class="text-xs mb-2">Address</p>
+            <p class="text-sx mb-4">poop</p>
+
+            <div class="flex gap-x-2">
+                <button class="text-white text-xs bg-blue-500 hover:bg-blue-600 py-2 px-3 rounded-md">
+                    Filters
+                </button>
+                <button class="text-white text-xs bg-blue-500 hover:bg-blue-600 py-2 px-3 rounded-md">
+                    Send to Google Maps
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-
