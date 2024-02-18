@@ -95,7 +95,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
   transition: bottom 0.3s ease-in-out; /* Smooth transition */
   transform: translateY(100%); /* Initially hidden */
-  transform: translateX(-200%); /* Makes sure the box is hidden */
+  transform: translateX(-2000%); /* Makes sure the box is hidden */
   border: 2px solid black;
   border-radius:10px;
 }
