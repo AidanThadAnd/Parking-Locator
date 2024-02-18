@@ -16,13 +16,10 @@ def home():
 def read_data_from_csv(filename):
     # Logic to read data from CSV
     dataFrame = pd.read_csv(filename)
-    for x in dataFrame.index:
-        j = dataFrame.loc[x,"PARKING_RESTRICTION"]
-        if j == 'Permit Required' or j == 'Payment Required':
-            dataFrame.drop(x, inplace = True)
     return dataFrame
 
-def important_method(desiredLength, desiredDistance):
+# Hopefully brings everything together once front end data is passed.
+def important_method(desiredLength, desiredDistance, payment, ovnight):
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
 
@@ -34,7 +31,6 @@ def important_method(desiredLength, desiredDistance):
 
 # filter useless restrictions
 def res_filter_useless_restrictions(dataFrame):
-    res_filter_parking_restrictions(dataFrame, 'Payment Required')
     res_filter_parking_restrictions(dataFrame, 'Special Permit')
     res_filter_parking_restrictions(dataFrame, 'Handicap Permit Required')
     res_filter_parking_restrictions(dataFrame, 'EOC Permit')
