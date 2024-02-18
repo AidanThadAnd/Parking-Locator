@@ -53,11 +53,7 @@
 
          //Call the updateMap function initially or based on user actions
 
-            L.marker([51.044, -114.0719]).addTo(map)
-                .bindPopup('Yeh')
-                .openPopup();
-            
-                var markers = L.markerClusterGroup();
+            var markers = L.markerClusterGroup();
             var geoJsonLayer = L.geoJson(mapdata, {
             onEachFeature: function (feature, layer) {
             layer.bindPopup('<p><b>@'+ feature.properties.screen_name +'</b></p><p><a href="'+ feature.properties.url +'" target="_blank">'+ feature.properties.text +'</a></p>');
