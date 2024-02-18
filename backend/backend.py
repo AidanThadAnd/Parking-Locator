@@ -24,16 +24,6 @@ def important_method(desiredTime, desiredDistance, payment, ovnight, userAddress
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
     userCoords = get_address_coords(userAddress)
 
-    res_filter_useless_restrictions(resDF)
-    ons_filter_non_parking_zones(onsDF)
-
-    res_filter_parking_restrictions(resDF, desiredTime)
-    ons_filter_parking_times(onsDF, desiredTime)
-    if payment == True:
-        filter_payment_required(resDF, onsDF)
-    if ovnight == True:
-        filter_overnight_parking(resDF)
-
     resFloatCoords = get_float_coords(resDF)
     onsFloatCoords = get_float_coords(onsDF)
     resTuples = avg_lat_long(resFloatCoords)
@@ -42,7 +32,17 @@ def important_method(desiredTime, desiredDistance, payment, ovnight, userAddress
     onsDistList = compare_distances(userCoords=userCoords, tuplesList=onsTuples)
     filter_df_distance(resDF, resDistList, desiredDistance)
     filter_df_distance(onsDF, onsDistList, desiredDistance)
-    return
+
+    res_filter_useless_restrictions(resDF)
+    ons_filter_non_parking_zones(onsDF)
+    res_filter_parking_restrictions(resDF, desiredTime)
+    ons_filter_parking_times(onsDF, desiredTime)
+    if payment == True:
+        filter_payment_required(resDF, onsDF)
+    if ovnight == True:
+        filter_overnight_parking(resDF)
+
+    return onsDF, resDF
 
 def filter_overnight_parking(dataFrame):
     for x in dataFrame.index:
@@ -79,7 +79,7 @@ def convert_coord_km(lat, long):
 def res_filter_parking_restrictions(dataFrame, desiredRestriction):
     if isinstance(desiredRestriction, int):
         for x in dataFrame.index:
-            if dataFrame.loc[x,"PARKING_RESTRICTION"] != 'NONE' and int(dataFrame.loc[x,"PARKING_RESTRICTION"]) < desiredRestriction:
+            if dataFrame.loc[x,"PARKING_RESTRICTION"] != 'NONE' and dataFrame.loc[x,"PARKING_RESTRICTION"] != "Payment Required" and int(dataFrame.loc[x,"PARKING_RESTRICTION"]) < desiredRestriction:
                 dataFrame.drop(x, inplace = True)
     else:
         for x in dataFrame.index:
@@ -162,4 +162,4 @@ def filter_df_distance(df, distanceList, desiredDistance):
 if __name__ == '__main__':
     app.run()
 
-print(home())
+# print(important_method(180, .5, True, False, '1400 12 Ave SW, Calgary'))
