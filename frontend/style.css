@@ -1,10 +1,9 @@
+/* Your existing CSS styles */
 body {
   margin: 0;
   padding: 0;
-  font-family: "Kantumruy Pro", sans-serif; /* Use Kantumruy Pro font for all text */
+  font-family: "Kantumruy Pro", sans-serif;
 }
-
-
 
 .container {
   overflow: visible;
@@ -12,15 +11,10 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-
   background: hsla(129, 67%, 34%, 1);
-
   background: linear-gradient(135deg, hsla(129, 67%, 34%, 1) 0%, hsla(128, 45%, 69%, 1) 100%);
-  
   background: -moz-linear-gradient(135deg, hsla(129, 67%, 34%, 1) 0%, hsla(128, 45%, 69%, 1) 100%);
-  
   background: -webkit-linear-gradient(135deg, hsla(129, 67%, 34%, 1) 0%, hsla(128, 45%, 69%, 1) 100%);
-  
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1D912E", endColorstr="#8CD396", GradientType=1 );
 }
 
@@ -53,8 +47,9 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
 .realMap {
@@ -84,26 +79,23 @@ body {
   cursor: pointer;
 }
 
+.filter-values {
+  color: black;
+}
 
 .filter-menu {
   position: absolute;
-  bottom: 0; ; /* Position at the bottom */
+  bottom: 0;
   width: 316px;
-  height: 30vh; /* 1/3 of the screen height */
-  background-color: #559C71; /* Customize background */
+  height: 30vh;
+  background-color: #559C71;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-  transition: bottom 0.3s ease-in-out; /* Smooth transition */
-  transform: translateY(100%); /* Initially hidden */
-  transform: translateX(-2000%); /* Makes sure the box is hidden */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.3s ease-in-out;
+  transform: translateX(-2000%);
   border: 2px solid black;
-  border-radius:10px;
+  border-radius: 10px;
 }
-
-.button-container .primary-button span {
-  font-size: 12px; /* Adjust the font size as needed */
-}
-
 
 .close-button-container {
   position: absolute;
@@ -113,25 +105,63 @@ body {
 }
 
 .close-button {
-  background-color: transparent; /* Customize background */
+  background-color: transparent;
   border: none;
-  color: #fff; /* Customize color */
-  font-size: 10px; /* Customize font size */
+  color: #fff;
+  font-size: 10px;
   cursor: pointer;
 }
 
-
-
 .filter-menu.shown {
-
   animation: slide-up 0.5s ease-in-out forwards;
 }
 
 @keyframes slide-up {
   from {
-    transform: translateY(100%);
+      transform: translateY(100%);
   }
   to {
-    transform: translateY(0);
+      transform: translateY(0);
   }
+}
+
+.button-container .primary-button span{
+  font-size: 12px;
+}
+search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add some space from the top */
+}
+
+#searchInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-container {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  z-index: 1; /* Ensure search bar is above the map */
+}
+
+#searchButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4285f4;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#map { width: 334px; height: 400px; }
+
+#searchButton:hover {
+  background-color: #357ae8;
+}
+
+#searchResults {
+  text-align: center; /* Center search results */
 }

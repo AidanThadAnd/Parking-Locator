@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Park Freezy</title>
     
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -35,6 +34,9 @@
             </div>
         </div>
         <div class="map-container">
+            <div class="map-container">
+
+
              <div id="map">    <!-- Leaflet Installation-->
                 <style type="text/css">
                     #map { width: 334px; height: 400px; }
@@ -84,32 +86,41 @@
             markers.addLayer(geoJsonLayer);
             map.addLayer(markers);
             map.fitBounds(markers.getBounds());
-            </script></div>
+            </script>
+                            <div class="search-container">
+                                <input type="text" id="searchInput" placeholder="Search...">
+                                <button id="searchButton">Search</button>
+                              <div id="searchResults"></div>
         </div>
+        </div>
+        </div>
+
         <div class="button-container">
             <button class="primary-button filters-button">Filter
-                <br><span>Walking Time | Max Parking Time | Paid Parking</span>
+                <br><span id="filter-values" class="filter-values">Walking Time | Max Parking Time | Paid Parking <br>
+
+                     <span id="walking-time-value">30 minutes</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="max-parking-time-value">&nbsp;4 hours</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="paid-parking-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
-                <div class="filter-menu hidden">
-                    <div class="close-button-container">
-                        <button class="close-button">Close</button>
-                    </div>
-                    <p class="filter-option">Walking Time</p>
-                    <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
-                    <span id="walking-time-value">30 minutes</span>
+            <div class="filter-menu hidden">
+                <div class="close-button-container">
+                    <button class="close-button">Close</button>
+                </div>
+                <p class="filter-option">Walking Time</p>
+                <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
+                <span id="walking-time-display">30 minutes</span>
 
+                <p class="filter-option">Max Parking Time</p>
+                <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
+                <span id="max-parking-time-display">4 hours</span>
 
-                    <p class="filter-option">Max Parking Time</p>
-                    <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
-                    <span id="max-parking-time-value">4 hours</span>
-
-
-                    <p class="filter-option">Paid Parking</p>
-                    <select id="paid-parking" name="paid-parking">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                  </div>
+                <p class="filter-option">Paid Parking</p>
+                <select id="paid-parking" name="paid-parking">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
             <button class="primary-button">Send to Google Maps</button>
         </div>
     </div>
@@ -118,4 +129,3 @@
     
 </body>
 </html>
-
