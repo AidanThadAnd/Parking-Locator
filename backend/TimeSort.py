@@ -79,12 +79,6 @@ def enforceable_time_check(dataframe):
     # Remove rows marked for removal
     dataframe.drop(index=rows_to_remove, inplace=True)
     return dataframe
-print("before: ")
-print(dataframe)
-enforceable_time_check(dataframe)
-print("after: ")
-print(dataframe)
-
 
 
 
