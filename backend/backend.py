@@ -162,6 +162,7 @@ def filter_df_distance(df, distanceList, desiredDistance):
 if __name__ == '__main__':
     app.run()
 
+#Filters dataframes based on user time and day
 def time_restriction_filter(dataframe):
     # Get current user time and day
     current_time = datetime.datetime.now().strftime("%H%M")
