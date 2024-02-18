@@ -9,15 +9,16 @@ def home():
     # Perform tasks with CSV data here
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
-    filter_parking_restrictions(resDF, "Payment Required")
     userCoords = get_address_coords('1400 12 Ave SW, Calgary')
-    return userCoords
+    filter_parking_restrictions(resDF)
+    return resDF
 
 def read_data_from_csv(filename):
     # Logic to read data from CSV
     dataFrame = pd.read_csv(filename)
     for x in dataFrame.index:
-        if dataFrame.loc[x,"PARKING_RESTRICTION"] == 'Permit Required':
+        j = dataFrame.loc[x,"PARKING_RESTRICTION"]
+        if j == 'Permit Required' or j == 'Payment Required':
             dataFrame.drop(x, inplace = True)
     return dataFrame
 
@@ -66,4 +67,4 @@ def get_float_coords(dataFrame):
 if __name__ == '__main__':
     app.run()
 
-print(get_address_coords('1400 12 Ave SW, Calgary'))
+print(home())
