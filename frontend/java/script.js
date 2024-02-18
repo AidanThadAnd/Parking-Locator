@@ -59,7 +59,6 @@ paidParkingSelect.addEventListener("change", () => {
 walkingTimeRange.addEventListener("input", () => {
     walkingTimeDisplay.textContent = walkingTimeRange.value + " minutes";
     walkingTimeValueAPI = walkingTimeRange.value;
-    console.log(walkingTimeValueAPI);
 });
 
  maxParkingTimeRange = document.getElementById("max-parking-time");
@@ -116,21 +115,10 @@ document.getElementById('search-button').addEventListener('click', handleSearch)
 
 //Talking to backend
 async function retrieveParking(/*address, paidParkingValue, maxParkingTimeValue, walkingTimeValue*/) {
-  console.log("Atleast this works");
 
   walkingTimeValueAPI = (walkingTimeValueAPI /15);
 
   walkingTimeValueAPI = parseFloat(walkingTimeValueAPI.toFixed(3));
-
-  console.log(paidParkingValueAPI);
-  console.log(walkingTimeValueAPI);
-  console.log(maxParkingTimeValueAPI);
-
-  
-  address = "1400 12 Ave SW, Calgary";
-  paidParkingValue = false;
-  maxParkingTimeValue= 180;
-  walkingTimeValue = 0.5;
 
 
   const data = {
@@ -160,7 +148,7 @@ async function retrieveParking(/*address, paidParkingValue, maxParkingTimeValue,
   else
   {
     updateMap(coordinate);
-    zoomToPin(map, coordinate[0], coordinate[1], 10);
+    zoomToPin(map, coordinate[0], coordinate[1] * -1, 18);
   }
 
   return;
@@ -179,7 +167,7 @@ function updateMap(parkingCoords) {
           // Add new markers based on the updated coordinates
 
          
-         var marker = L.marker([parkingCoords[0], parkingCoords[1]]).addTo(map);
+         var marker = L.marker([parkingCoords[0], parkingCoords[1] * -1]).addTo(map);
          return;
 }
 
