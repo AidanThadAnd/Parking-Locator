@@ -26,12 +26,28 @@
             <div class="map"></div>
         </div>
         <div class="button-container">
-            <button class="primary-button filters-button">Filters</button>
+            <button class="primary-button filters-button">Filter
+                <br><span>Walking Time | Max Parking Time | Paid Parking</span>
+            </button>
                 <div class="filter-menu hidden">
                     <div class="close-button-container">
                         <button class="close-button">Close</button>
                     </div>
-                    
+                    <p class="filter-option">Walking Time</p>
+                    <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
+                    <span id="walking-time-value">30 minutes</span>
+
+
+                    <p class="filter-option">Max Parking Time</p>
+                    <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
+                    <span id="max-parking-time-value">4 hours</span>
+
+
+                    <p class="filter-option">Paid Parking</p>
+                    <select id="paid-parking" name="paid-parking">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
                   </div>
             <button class="primary-button">Send to Google Maps</button>
         </div>

@@ -16,3 +16,22 @@ const closeButton = document.querySelector('.close-button');
 closeButton.addEventListener('click', () => {
     filterMenu.classList.toggle('shown');
   });
+
+/*
+For The filters menu
+*/
+
+// JavaScript code to handle changes in filter values and update displayed values
+const walkingTimeRange = document.getElementById("walking-time");
+const walkingTimeValue = document.getElementById("walking-time-value");
+  walkingTimeRange.addEventListener("input", () => {
+    walkingTimeValue.textContent = walkingTimeRange.value + " minutes";
+});
+
+const maxParkingTimeRange = document.getElementById("max-parking-time");
+const maxParkingTimeValue = document.getElementById("max-parking-time-value");
+  maxParkingTimeRange.addEventListener("input", () => {
+const hours = maxParkingTimeRange.value / 60;
+const formattedHours = hours === 1 ? "1 hour" : hours + " hours";
+    maxParkingTimeValue.textContent = formattedHours;
+});
