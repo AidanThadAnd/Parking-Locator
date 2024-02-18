@@ -10,8 +10,8 @@ def home():
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
     filter_parking_restrictions(resDF, "Payment Required")
-    addressDF = get_address_coords('1400 12 Ave SW, Calgary')
-    return addressDF
+    userCoords = get_address_coords('1400 12 Ave SW, Calgary')
+    return userCoords
 
 def read_data_from_csv(filename):
     # Logic to read data from CSV
@@ -29,11 +29,16 @@ def filter_parking_restrictions(dataFrame, desiredRestriction):
             dataFrame.drop(x, inplace = True)
     return dataFrame
 
-# 
+# This method uses the canadian governments free geolocation service to extract matching coordinates based on 
+# provided address
 def get_address_coords(address):
     # 1400 12 Ave SW, Calgary, AB T3C 0P7, 51.043345859995114, -114.0940433180538
     addressDF = requests.get('https://geogratis.gc.ca/services/geolocation/en/locate?q=' + address)
-    return addressDF.json()
+    userAddressList = addressDF.json()
+
+    for x in userAddressList[1].values():
+        if type(x) is dict:
+            return x.get('coordinates')
 
 if __name__ == '__main__':
     app.run()
