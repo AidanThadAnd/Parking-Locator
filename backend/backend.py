@@ -34,7 +34,7 @@ def filter_parking_restrictions(dataFrame, desiredRestriction):
     return dataFrame
 
 # This method uses the canadian governments free geolocation service to extract matching coordinates based on 
-# provided address
+# provided address returns list of floats
 def get_address_coords(address):
     # 1400 12 Ave SW, Calgary, AB T3C 0P7, 51.043345859995114, -114.0940433180538
     addressDF = requests.get('https://geogratis.gc.ca/services/geolocation/en/locate?q=' + address)
@@ -45,9 +45,10 @@ def get_address_coords(address):
             return x.get('coordinates')
 
 # Parses the dataframe for coords and returns a list of lists containing floats for further analysis
+# Returns list of list of floats
 def get_float_coords(dataFrame):
     coordsList = []
-    for string in resDF.loc[:, "line"]:
+    for string in dataFrame.loc[:, "line"]:
         getvals = []
         for val in string:
             if val.isdigit() or val.isspace() or val == '.':
