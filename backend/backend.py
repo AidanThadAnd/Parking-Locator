@@ -76,6 +76,26 @@ def get_float_coords(dataFrame):
         coordsList.append(listnum)
     return coordsList
 
+# Parses a list of lists of floats to produce the avg lat and long of lines
+def avg_lat_long(coordsList):
+    tuplesList = []
+    for li in coordsList:
+        l2 = []
+        li.sort()
+        sumFirstHalf = 0
+        sumSecondHalf = 0
+        for i in range(len(li)):
+            if i < len(li)/2:
+                sumFirstHalf += li[i]
+                # print(sumFirstHalf)
+            else:
+                sumSecondHalf += li[i]
+        l2.append(sumFirstHalf/(len(li)/2))
+        l2.append(sumSecondHalf/(len(li)/2))
+        tuplesList.append(l2)
+    print(len(tuplesList))
+    return tuplesList
+
 if __name__ == '__main__':
     app.run()
 
