@@ -88,14 +88,16 @@ body {
 .filter-menu {
   position: absolute;
   bottom: 0; ; /* Position at the bottom */
-  width: 100%;
+  width: 316px;
   height: 30vh; /* 1/3 of the screen height */
   background-color: #559C71; /* Customize background */
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
   transition: bottom 0.3s ease-in-out; /* Smooth transition */
   transform: translateY(100%); /* Initially hidden */
-  transform: translateX(-100%); /* Makes sure the box is hidden */
+  transform: translateX(-200%); /* Makes sure the box is hidden */
+  border: 2px solid black;
+  border-radius:10px;
 }
 
 .close-button-container {
@@ -116,6 +118,7 @@ body {
 
 
 .filter-menu.shown {
+
   animation: slide-up 0.5s ease-in-out forwards;
 }
 
