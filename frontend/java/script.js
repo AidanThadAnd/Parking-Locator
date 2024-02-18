@@ -101,6 +101,51 @@ function handleSearch() {
 // Attach click event listener to search button
 document.getElementById('search-button').addEventListener('click', handleSearch);
 
+//Talking to backend
+async function retrieveParking(address, paidParkingValue, maxParkingTimeValue, walkingTimeValue) {
+  console.log("Atleast this works");
+
+  address = "1400 12 Ave SW, Calgary";
+  paidParkingValue = false;
+  maxParkingTimeValue= 180;
+  walkingTimeValue = .5;
+
+
+
+  const data = {
+      address: address,
+      paidParkingValue: paidParkingValue,
+      maxParkingTimeValue: maxParkingTimeValue,
+      walkingTimeValue: walkingTimeValue
+  };
+
+  const response = await fetch('http://127.0.0.1:5000/get_coordinates', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+  });
+
+  // Handle response here
+  const result = await response.json();
+
+  console.log(result.coordinates[0]);
+  
+
+  coordinate = result.coordinates[0];
+
+  return;
+
+}
+
+
+
+
+
+
+
 
 
 //walkingTimeValue
