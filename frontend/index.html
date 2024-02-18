@@ -35,10 +35,7 @@
         </div>
         <div class="map-container">
             <div class="map-container">
-                <div class="search-container">
-                  <input type="text" id="searchInput" placeholder="Search...">
-                  <button id="searchButton">Search</button>
-                <div id="searchResults"></div>
+
 
              <div id="map">    <!-- Leaflet Installation-->
                 <style type="text/css">
@@ -62,10 +59,15 @@
             markers.addLayer(geoJsonLayer);
             map.addLayer(markers);
             map.fitBounds(markers.getBounds());
-            </script></div>
+            </script>
+                            <div class="search-container">
+                                <input type="text" id="searchInput" placeholder="Search...">
+                                <button id="searchButton">Search</button>
+                              <div id="searchResults"></div>
         </div>
         </div>
         </div>
+
         <div class="button-container">
             <button class="primary-button filters-button">Filter
                 <br><span id="filter-values" class="filter-values">Walking Time | Max Parking Time | Paid Parking <br>

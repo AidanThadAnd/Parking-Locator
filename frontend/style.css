@@ -140,6 +140,14 @@ search-container {
   border-radius: 5px;
 }
 
+.search-container {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  z-index: 1; /* Ensure search bar is above the map */
+}
+
 #searchButton {
   padding: 10px 20px;
   border: none;
