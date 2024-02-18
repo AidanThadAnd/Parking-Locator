@@ -64,3 +64,49 @@ body {
   font-size: 16px; /* Adjusted font size */
   cursor: pointer;
 }
+
+
+.filter-menu {
+  position: absolute;
+  bottom: 0; /* Position at the bottom */
+  width: 100%;
+  height: 50vh; /* Half the screen height */
+  background-color: #559C71; /* Customize background */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+  transition: bottom 0.3s ease-in-out; /* Smooth transition */
+  transform: translateY(100%); /* Initially hidden */
+  transform: translateX(-100%); /* Makes sure the */
+
+
+}
+
+.close-button-container {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.close-button {
+  background-color: transparent; /* Customize background */
+  border: none;
+  color: #fff; /* Customize color */
+  font-size: 100px; /* Customize font size */
+  cursor: pointer;
+}
+
+
+
+.filter-menu.shown {
+  animation: slide-up 0.5s ease-in-out forwards;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
