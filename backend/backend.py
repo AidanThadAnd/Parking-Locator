@@ -10,7 +10,7 @@ def home():
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
     userCoords = get_address_coords('1400 12 Ave SW, Calgary')
-    filter_parking_restrictions(resDF)
+    res_filter_useless_restrictions(resDF)
     return resDF
 
 def read_data_from_csv(filename):
@@ -21,17 +21,29 @@ def read_data_from_csv(filename):
         if j == 'Permit Required' or j == 'Payment Required':
             dataFrame.drop(x, inplace = True)
     return dataFrame
+#gets rid of useless permit stuff
+def res_filter_useless_restrictions(dataFrame):
+    dataFrame = res_filter_parking_restrictions(dataFrame, 'Payment Required')
+    dataFrame = res_filter_parking_restrictions(dataFrame, 'Special Permit')
+    dataFrame = res_filter_parking_restrictions(dataFrame, 'Handicap Permit Required')
+    dataFrame = res_filter_parking_restrictions(dataFrame, 'EOC Permit')
+    return dataFrame
 
 # converts lat and long into km
 def convert_coord_km(lat, long):
     return abs(lat*111.2) + abs(long*111.3)
 
 # Filters the dataFrame by a desired parking restriction in the csv
-def filter_parking_restrictions(dataFrame, desiredRestriction):
-    for x in dataFrame.index:
-        j = dataFrame.loc[x,"PARKING_RESTRICTION"]
-        if j < desiredRestriction and j != 'NONE':
-            dataFrame.drop(x, inplace = True)
+# Filters the dataFrame by a desired parking restriction in the csv
+def res_filter_parking_restrictions(dataFrame, desiredRestriction):
+    if isinstance(desiredRestriction, int):
+        for x in dataFrame.index:
+            if dataFrame.loc[x,"PARKING_RESTRICTION"] != 'NONE' and int(dataFrame.loc[x,"PARKING_RESTRICTION"]) < desiredRestriction:
+                dataFrame.drop(x, inplace = True)
+    else:
+        for x in dataFrame.index:
+            if dataFrame.loc[x,"PARKING_RESTRICTION"] == desiredRestriction:
+                dataFrame.drop(x, inplace = True)
     return dataFrame
 
 # This method uses the canadian governments free geolocation service to extract matching coordinates based on 
