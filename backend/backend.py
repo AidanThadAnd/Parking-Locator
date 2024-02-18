@@ -12,7 +12,7 @@ def get_coordinates(desiredTime, desiredDistance, payment, ovnight, userAddress)
     res_filter_useless_restrictions(resDF)
 
 
-    onsDF, resDF = important_method(desiredTime, desiredDistance, payment, ovnight, userAddress) #how to get params?
+    onsDF, resDF = important_method(180, .5, True, False, '1400 12 Ave SW, Calgary') #how to get params?
     resFloatCoords = get_float_coords(resDF)
     onsFloatCoords = get_float_coords(onsDF)
     coordinates = avg_lat_long(resFloatCoords) + avg_lat_long(onsFloatCoords)
