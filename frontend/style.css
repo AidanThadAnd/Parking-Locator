@@ -8,7 +8,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: center; /* Center content vertically */
+  height: 140vh;
+  
+  background-image: url('source/background.png');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background */
 }
 
 .header {
@@ -28,8 +33,7 @@ body {
 
 .map-container {
   width: 100%;
-  height: 493px;
-  background-color: white;
+  height: 100%; /* Fill the entire height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,13 +46,16 @@ body {
 }
 
 .button-container {
-  margin-top: 100px;
+  margin-top: 50px; /* Decreased margin */
+  display: flex; /* Display buttons horizontally */
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center;
+  width: 250px; /* Adjusted width */
 }
 
 .primary-button {
-  display: block;
-  width: 316px;
-  height: 88px;
+  width: 100%; /* Adjusted button width */
+  height: 60px; /* Decreased button height */
   background-color: #007bff;
   color: white;
   border: none;
