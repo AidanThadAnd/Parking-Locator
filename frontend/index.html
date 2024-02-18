@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Park Freezy</title>
     
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-
-
-
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,33 +24,55 @@
         </div>
         <div class="button-container">
             <button class="primary-button filters-button">Filter
-                <br><span>Walking Time | Max Parking Time | Paid Parking</span>
+                <br><span id="filter-values" class="filter-values">Walking Time | Max Parking Time | Paid Parking <br>
+
+                     <span id="walking-time-value">30 minutes</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="max-parking-time-value">&nbsp;4 hours</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="paid-parking-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
-                <div class="filter-menu hidden">
-                    <div class="close-button-container">
-                        <button class="close-button">Close</button>
-                    </div>
-                    <p class="filter-option">Walking Time</p>
-                    <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
-                    <span id="walking-time-value">30 minutes</span>
+            <div class="filter-menu hidden">
+                <div class="close-button-container">
+                    <button class="close-button">Close</button>
+                </div>
+                <p class="filter-option">Walking Time</p>
+                <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
+                <span id="walking-time-display">30 minutes</span>
 
+                <p class="filter-option">Max Parking Time</p>
+                <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
+                <span id="max-parking-time-display">4 hours</span>
 
-                    <p class="filter-option">Max Parking Time</p>
-                    <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
-                    <span id="max-parking-time-value">4 hours</span>
-
-
-                    <p class="filter-option">Paid Parking</p>
-                    <select id="paid-parking" name="paid-parking">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                  </div>
+                <p class="filter-option">Paid Parking</p>
+                <select id="paid-parking" name="paid-parking">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
             <button class="primary-button">Send to Google Maps</button>
         </div>
     </div>
 
     <script src="./java/script.js"></script>
+    <script>
+        const walkingTimeRange = document.getElementById("walking-time");
+        const walkingTimeDisplay = document.getElementById("walking-time-display");
+        walkingTimeRange.addEventListener("input", () => {
+            walkingTimeDisplay.textContent = walkingTimeRange.value + " minutes";
+        });
+
+        const maxParkingTimeRange = document.getElementById("max-parking-time");
+        const maxParkingTimeDisplay = document.getElementById("max-parking-time-display");
+        maxParkingTimeRange.addEventListener("input", () => {
+            const hours = maxParkingTimeRange.value / 60;
+            const formattedHours = hours === 1 ? "1 hour" : hours + " hours";
+            maxParkingTimeDisplay.textContent = formattedHours;
+        });
+
+        const paidParkingSelect = document.getElementById("paid-parking");
+        const paidParkingValue = document.getElementById("paid-parking-value");
+        paidParkingSelect.addEventListener("change", () => {
+            paidParkingValue.textContent = paidParkingSelect.value === "yes" ? "Yes" : "No";
+        });
+    </script>
 </body>
 </html>
-
