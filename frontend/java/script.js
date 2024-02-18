@@ -35,3 +35,13 @@ const hours = maxParkingTimeRange.value / 60;
 const formattedHours = hours === 1 ? "1 hour" : hours + " hours";
     maxParkingTimeValue.textContent = formattedHours;
 });
+
+//Leaflet
+
+// Create a map instance and set the view
+var mymap = L.map('realMap').setView([51.505, -0.09], 13);
+
+// Add a tile layer from OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(mymap);
