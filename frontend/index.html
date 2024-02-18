@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Park Freezy</title>
     
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
 
+    <!-- Leaflet Installation-->
+    <!-- <link rel="stylesheet" href="./leaflet/leaflet.css">
+    <script src="./leaflet/leaflet.js"></script>> -->
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script src="mapdata.geojson" type="text/javascript"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
     <div class="container">
         <div class="header">
             <div class="title-container">
@@ -23,37 +34,98 @@
             </div>
         </div>
         <div class="map-container">
-            <div class="map"></div>
+            <div class="map-container">
+
+
+             <div id="map">    <!-- Leaflet Installation-->
+                <style type="text/css">
+                    #map { width: 334px; height: 400px; }
+                </style>
+            
+            <script>
+                var map = L.map('map').setView([51.044, -114.0719], 13);
+                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+            
+                // Function to update the map with new coordinates
+        //     function updateMap() {
+        //     // Fetch the updated coordinates from the Flask route
+        //     fetch('/api/get_coordinates')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             // Assume the coordinates are in the format [lat1, lon1, lat2, lon2, ...]
+        //             var updatedCoordinates = data.coordinates;
+
+        //             // Clear existing markers
+        //             map.eachLayer(function (layer) {
+        //                 if (layer instanceof L.Marker) {
+        //                     map.removeLayer(layer);
+        //                 }
+        //             });
+
+        //             // Add new markers based on the updated coordinates
+        //             for (var i = 0; i < updatedCoordinates.length; i += 2) {
+        //                 var marker = L.marker([updatedCoordinates[i], updatedCoordinates[i + 1]])
+        //                     .addTo(map);
+        //             }
+        //         });
+        // }
+        
+
+        // Call the updateMap function initially or based on user actions
+        // updateMap();
+            L.marker([51.044, -114.0719]).addTo(map)
+                .bindPopup('Yeh')
+                .openPopup();
+            
+                var markers = L.markerClusterGroup();
+            var geoJsonLayer = L.geoJson(mapdata, {
+            onEachFeature: function (feature, layer) {
+            layer.bindPopup('<p><b>@'+ feature.properties.screen_name +'</b></p><p><a href="'+ feature.properties.url +'" target="_blank">'+ feature.properties.text +'</a></p>');
+            }
+            });
+            markers.addLayer(geoJsonLayer);
+            map.addLayer(markers);
+            map.fitBounds(markers.getBounds());
+            </script>
+                            <div class="search-container">
+                                <input type="text" id="searchInput" placeholder="Search...">
+                                <button id="searchButton">Search</button>
+                              <div id="searchResults"></div>
         </div>
+        </div>
+        </div>
+
         <div class="button-container">
             <button class="primary-button filters-button">Filter
-                <br><span>Walking Time | Max Parking Time | Paid Parking</span>
+                <br><span id="filter-values" class="filter-values">Walking Time | Max Parking Time | Paid Parking <br>
+
+                     <span id="walking-time-value">30 minutes</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="max-parking-time-value">&nbsp;4 hours</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="paid-parking-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
-                <div class="filter-menu hidden">
-                    <div class="close-button-container">
-                        <button class="close-button">Close</button>
-                    </div>
-                    <p class="filter-option">Walking Time</p>
-                    <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
-                    <span id="walking-time-value">30 minutes</span>
+            <div class="filter-menu hidden">
+                <div class="close-button-container">
+                    <button class="close-button">Close</button>
+                </div>
+                <p class="filter-option">Walking Time</p>
+                <input type="range" id="walking-time" name="walking-time" min="5" max="60" step="5" value="30">
+                <span id="walking-time-display">30 minutes</span>
 
+                <p class="filter-option">Max Parking Time</p>
+                <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
+                <span id="max-parking-time-display">4 hours</span>
 
-                    <p class="filter-option">Max Parking Time</p>
-                    <input type="range" id="max-parking-time" name="max-parking-time" min="15" max="1440" step="15" value="240">
-                    <span id="max-parking-time-value">4 hours</span>
-
-
-                    <p class="filter-option">Paid Parking</p>
-                    <select id="paid-parking" name="paid-parking">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                  </div>
+                <p class="filter-option">Paid Parking</p>
+                <select id="paid-parking" name="paid-parking">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
             <button class="primary-button">Send to Google Maps</button>
         </div>
     </div>
 
     <script src="./java/script.js"></script>
+    
 </body>
 </html>
-
