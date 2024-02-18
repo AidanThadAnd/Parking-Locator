@@ -21,19 +21,36 @@ def read_data_from_csv(filename):
         if j == 'Permit Required' or j == 'Payment Required':
             dataFrame.drop(x, inplace = True)
     return dataFrame
-#gets rid of useless permit stuff
+
+def important_method(desiredLength, desiredDistance):
+    onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
+    resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
+
+    res_filter_useless_restrictions(resDF)
+    ons_filter_non_parking_zones(onsDF)
+
+    res_filter_parking_restrictions(resDF, desiredLength)
+    return
+
+# filter useless restrictions
 def res_filter_useless_restrictions(dataFrame):
-    dataFrame = res_filter_parking_restrictions(dataFrame, 'Payment Required')
-    dataFrame = res_filter_parking_restrictions(dataFrame, 'Special Permit')
-    dataFrame = res_filter_parking_restrictions(dataFrame, 'Handicap Permit Required')
-    dataFrame = res_filter_parking_restrictions(dataFrame, 'EOC Permit')
+    res_filter_parking_restrictions(dataFrame, 'Payment Required')
+    res_filter_parking_restrictions(dataFrame, 'Special Permit')
+    res_filter_parking_restrictions(dataFrame, 'Handicap Permit Required')
+    res_filter_parking_restrictions(dataFrame, 'EOC Permit')
+    return dataFrame
+
+# filters for users desired parking length
+def ons_filter_parking_times(dataFrame, desiredRestriction):
+    for x in dataFrame.index:
+        if dataFrame.loc[x, "MAX_TIME"] < desiredRestriction:
+            dataFrame.drop(x, inplace = True)
     return dataFrame
 
 # converts lat and long into km
 def convert_coord_km(lat, long):
     return abs(lat*111.2) + abs(long*111.3)
 
-# Filters the dataFrame by a desired parking restriction in the csv
 # Filters the dataFrame by a desired parking restriction in the csv
 def res_filter_parking_restrictions(dataFrame, desiredRestriction):
     if isinstance(desiredRestriction, int):
@@ -44,6 +61,13 @@ def res_filter_parking_restrictions(dataFrame, desiredRestriction):
         for x in dataFrame.index:
             if dataFrame.loc[x,"PARKING_RESTRICTION"] == desiredRestriction:
                 dataFrame.drop(x, inplace = True)
+    return dataFrame
+
+#filters non-parking zones
+def ons_filter_non_parking_zones(dataFrame):
+    for x in dataFrame.index:
+        if dataFrame.loc[x, "ZONE_TYPE"] != 'Parking Zone':
+            dataFrame.drop(x, inplace = True)
     return dataFrame
 
 # This method uses the canadian governments free geolocation service to extract matching coordinates based on 
@@ -94,6 +118,15 @@ def avg_lat_long(coordsList):
         l2.append(sumSecondHalf/(len(li)/2))
         tuplesList.append(l2)
     return tuplesList
+
+# takes in userCoords and tuplesList to generate a list of distances from the user coords
+def compare_distances(userCoords, tuplesList):
+    distanceFromUserList = []
+    for li in tuplesList:
+        lat = abs(userCoords[1] - li[0])
+        long = abs(li[1] + userCoords[0])
+        distanceFromUserList.append(convert_coord_km(lat=lat, long=long))
+    return distanceFromUserList
 
 if __name__ == '__main__':
     app.run()
