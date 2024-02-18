@@ -93,7 +93,6 @@ def avg_lat_long(coordsList):
         l2.append(sumFirstHalf/(len(li)/2))
         l2.append(sumSecondHalf/(len(li)/2))
         tuplesList.append(l2)
-    print(len(tuplesList))
     return tuplesList
 
 if __name__ == '__main__':
