@@ -1,17 +1,24 @@
-from flask import Flask
+from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    # Perform tasks with CSV data here
+@app.route('/api/get_coordinates', methods=['GET'])
+def get_coordinates(desiredTime, desiredDistance, payment, ovnight, userAddress):
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
-    userCoords = get_address_coords('1400 12 Ave SW, Calgary')
+    # userCoords = get_address_coords(userAddress)
     res_filter_useless_restrictions(resDF)
-    return resDF
+
+
+    onsDF, resDF = important_method(desiredTime, desiredDistance, payment, ovnight, userAddress) #how to get params?
+    resFloatCoords = get_float_coords(resDF)
+    onsFloatCoords = get_float_coords(onsDF)
+    coordinates = avg_lat_long(resFloatCoords) + avg_lat_long(onsFloatCoords)
+
+
+    return jsonify({'coordinates': coordinates})
 
 def read_data_from_csv(filename):
     # Logic to read data from CSV
