@@ -34,6 +34,12 @@
             </div>
         </div>
         <div class="map-container">
+            <div class="map-container">
+                <div class="search-container">
+                  <input type="text" id="searchInput" placeholder="Search...">
+                  <button id="searchButton">Search</button>
+                <div id="searchResults"></div>
+
              <div id="map">    <!-- Leaflet Installation-->
                 <style type="text/css">
                     #map { width: 334px; height: 400px; }
@@ -57,6 +63,8 @@
             map.addLayer(markers);
             map.fitBounds(markers.getBounds());
             </script></div>
+        </div>
+        </div>
         </div>
         <div class="button-container">
             <button class="primary-button filters-button">Filter

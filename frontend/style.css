@@ -47,8 +47,9 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
 .realMap {
@@ -126,4 +127,33 @@ body {
 
 .button-container .primary-button span{
   font-size: 12px;
+}
+search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add some space from the top */
+}
+
+#searchInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#searchButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4285f4;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#map { width: 334px; height: 400px; }
+
+#searchButton:hover {
+  background-color: #357ae8;
+}
+
+#searchResults {
+  text-align: center; /* Center search results */
 }

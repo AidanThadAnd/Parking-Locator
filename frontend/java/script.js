@@ -86,3 +86,24 @@ maxParkingTimeRange.addEventListener("input", () => {
    formattedHours = hours === 1 ? "1 hour" : hours + " hours";
   maxParkingTimeValue.textContent = formattedHours;
 });
+
+// Function to handle search button click
+function handleSearch() {
+  var searchTerm = document.getElementById('search-input').value;
+  if (searchTerm.trim() !== '') {
+      // Perform search operation with the search term (e.g., display results, zoom to location, etc.)
+      alert('Searching for: ' + searchTerm);
+  } else {
+      alert('Please enter a search term.');
+  }
+}
+
+// Attach click event listener to search button
+document.getElementById('search-button').addEventListener('click', handleSearch);
+
+
+
+//walkingTimeValue
+//maxParkingTimeValue
+//paidParkingValue
+//address
