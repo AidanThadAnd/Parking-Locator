@@ -1,24 +1,36 @@
 from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import requests
+from flask_cors import CORS
 import datetime
 import re
 
 app = Flask(__name__)
 
-@app.route('/api/get_coordinates', methods=['GET'])
-def get_coordinates(desiredTime, desiredDistance, payment, ovnight, userAddress):
+CORS(app)
+
+@app.route('/get_coordinates', methods=['POST'])
+def get_coordinates():
+    data = request.json
+    userAddress = data.get('address')
+    payment = data.get('paidParkingValue')
+    desiredTime = data.get('maxParkingTimeValue')
+    desiredDistance = data.get('walkingTimeValue')
+    
+    print("Did you get here?")
+
     onsDF = read_data_from_csv('backend/datasets/On-Street_Parking_Zones_20240217.csv')
     resDF = read_data_from_csv('backend/datasets/On-Street_Residential_Parking_Zones_20240217.csv')
     # userCoords = get_address_coords(userAddress)
     res_filter_useless_restrictions(resDF)
 
 
-    onsDF, resDF = important_method(180, .5, True, False, '1400 12 Ave SW, Calgary') #how to get params?
+    onsDF, resDF = important_method(desiredTime, desiredDistance, payment, False, userAddress) #how to get params?
     resFloatCoords = get_float_coords(resDF)
     onsFloatCoords = get_float_coords(onsDF)
     coordinates = avg_lat_long(resFloatCoords) + avg_lat_long(onsFloatCoords)
 
+    print(coordinates)
 
     return jsonify({'coordinates': coordinates})
 
