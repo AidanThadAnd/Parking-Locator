@@ -7,57 +7,9 @@ dataframe = pd.read_csv("/users/andresisturiz/PARKING/datasets/On-Street_Residen
 #Check if Parking spot is open according to the local time and then 
 #Takes in address to see if it is open
 
-def enforceable_time_check(dataframe):
-    # Get current user time and day
-    current_time = datetime.datetime.now().strftime("%H%M")
-    current_day = str(datetime.datetime.now().strftime("%a").upper())
-    print(current_time)
-    print(current_day)
 
-    # Filter out rows with 'None' in TIME_RESTRICTION
-    dataframe = dataframe[~dataframe['TIME_RESTRICTION'].str.contains('None')]
-
-    # Check if user time and day are within range of parking spot availability
-    for x in dataframe.index:
-        # Convert the value to a string before passing it to re.search()
-        time_restriction_str = str(dataframe.loc[x, "TIME_RESTRICTION"])
-
-        # Split the time range
-        start_time, end_time = time_restriction_str.split('-')
-
-        # Print start and end time for debugging
-        print("Start time:", start_time)
-        print("End time:", end_time)
-
-        # Check date
-        day_match = re.search(current_day, time_restriction_str)
-
-        if day_match:
-            print("Date is the same")
-        else:
-            print("Date is not the same")
-        
-        #Check date
-       # day_match = re.search(current_day, dataframe.loc[x, "TIME_RESTRICTION"])
-        
-enforceable_time_check(dataframe)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-""""""""""
 # Create a DataFrame for testing
-df = pd.read_csv("/users/andresisturiz/PARKING/datasets/On-Street_Residential_Parking_Zones_20240217 copy.csv")
+#df = pd.read_csv("/users/andresisturiz/PARKING/datasets/On-Street_Residential_Parking_Zones_20240217 copy 2.csv")
 #df = pd.DataFrame({'TIME_RESTRICTION': ['0800-1700 MON-FRI', '0900-1800 MON-SAT', 'Special Permit','0800-2359 MON-SUN',]})
 
 def enforceable_time_check(dataframe):
@@ -106,5 +58,5 @@ def enforceable_time_check(dataframe):
 
 
 
-""""""""""" 
+
 
