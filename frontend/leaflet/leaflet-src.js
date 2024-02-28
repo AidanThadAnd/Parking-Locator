@@ -13730,7 +13730,6 @@
   	// @option easeLinearity: Number = 0.2
   	easeLinearity: 0.2,
 
-  	// TODO refactor, move to CRS
   	// @option worldCopyJump: Boolean = false
   	// With this option enabled, the map tracks when you pan to another "copy"
   	// of the world and seamlessly jumps to the original one so that all overlays

@@ -174,13 +174,3 @@ function updateMap(parkingCoords) {
 function zoomToPin(map, latitude, longitude, zoomLevel) {
   map.setView([latitude, longitude], zoomLevel);
 }
-
-
-
-
-
-
-//walkingTimeValue
-//maxParkingTimeValue
-//paidParkingValue
-//address
