@@ -12,5 +12,6 @@ We were able to effectively take the data from the CSV data files provided from 
 
 ## Home Page
 <img width="318" alt="Screenshot 2024-02-28 at 11 03 46 AM" src="https://github.com/AidanThadAnd/Parking-Locator/assets/78242226/8ce3c680-2bc9-4ef6-aef5-e9759ccebc75">
+
 ## Filters Page
 <img width="316" alt="Screenshot 2024-02-28 at 11 04 12 AM" src="https://github.com/AidanThadAnd/Parking-Locator/assets/78242226/984f1105-5e9b-4fe3-aceb-36f07b60a9d3">
