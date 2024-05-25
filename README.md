@@ -17,3 +17,29 @@ We were able to effectively take the data from the CSV data files provided from 
 ## Home Page & Filters Implementation
 <img width="316" height="700" alt="Screenshot 2024-02-28 at 11 13 03 AM" src="https://github.com/AidanThadAnd/Parking-Locator/assets/78242226/c0655b3b-bd9e-46d0-92b6-cb71df62bb8f">
 <img width="316" height="700" alt="Screenshot 2024-02-28 at 11 13 17 AM" src="https://github.com/AidanThadAnd/Parking-Locator/assets/78242226/07dbee15-b7f7-4098-bd34-65d3af5d96f1">
+
+
+<details>
+  <summary>Installation Details</summary>
+  
+    To avoid the pain of dependency hell if you want to install and/or test this you will use the following steps to ensure proper repeatability and organization.
+
+    1. Activate the python virtual enviroment
+    ```bash
+    cd backend
+
+    source/bin/activate  # Activate the virtual environment on Unix/macOS
+    # OR
+    myenv\Scripts\activate  # Activate the virtual environment on Windows
+    ```
+    2. Install packages from 'requirements.txt'
+        ```bash
+        pip install -r requirements.txt
+        ```
+    3. If you decide to add additional packages
+        ```bash
+        pip freeze > requirements.txt
+        ```
+    
+    **By following these steps this should ensure that using this project is as painless as can be**
+</details>
