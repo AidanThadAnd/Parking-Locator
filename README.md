@@ -10,7 +10,7 @@ We built it by connecting a frontend designed in Figma and implemented with HTML
 ## Accomplishments that we're proud of
 We were able to effectively take the data from the CSV data files provided from the Calgary page and be able to filter through them for desired specifications. We were also able to make a pleasing frontend that was smooth and easy for users to use.
 
-##Installing
+## Installing
 <details>
   <summary>Installation Details</summary>
   To avoid the pain of dependency hell if you want to install and/or test this you will use the following steps to ensure proper repeatability and organization.
