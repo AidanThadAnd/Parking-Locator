@@ -15,12 +15,12 @@ We were able to effectively take the data from the CSV data files provided from 
   <summary>Installation Details</summary>
   To avoid the pain of dependency hell if you want to install and/or test this you will use the following steps to ensure proper repeatability and organization.
 
-1. Activate the python virtual environment
+1. Activate the Python virtual environment
   ```bash
   cd backend
-  source/bin/activate  # Activate the virtual environment on Unix/macOS
+  source bin/activate  # Activate the virtual environment on Unix/macOS
   # OR
-  myenv\Scripts\activate  # Activate the virtual environment on Windows
+  bin\Scripts\activate  # Activate the virtual environment on Windows, maybe idk, search it up if you have problems
   ```
 2. Install packages from 'requirements.txt'
    ```bash
