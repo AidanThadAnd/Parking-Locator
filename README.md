@@ -21,25 +21,23 @@ We were able to effectively take the data from the CSV data files provided from 
 
 <details>
   <summary>Installation Details</summary>
-  
-    To avoid the pain of dependency hell if you want to install and/or test this you will use the following steps to ensure proper repeatability and organization.
+  To avoid the pain of dependency hell if you want to install and/or test this you will use the following steps to ensure proper repeatability and organization.
 
-    1. Activate the python virtual enviroment
-    ```bash
-    cd backend
-
-    source/bin/activate  # Activate the virtual environment on Unix/macOS
-    # OR
-    myenv\Scripts\activate  # Activate the virtual environment on Windows
-    ```
-    2. Install packages from 'requirements.txt'
-        ```bash
-        pip install -r requirements.txt
-        ```
-    3. If you decide to add additional packages
-        ```bash
-        pip freeze > requirements.txt
-        ```
+  1. Activate the python virtual enviroment
+  ```bash
+  cd backend
+  source/bin/activate  # Activate the virtual environment on Unix/macOS
+  # OR
+  myenv\Scripts\activate  # Activate the virtual environment on Windows
+  ```
+  2. Install packages from 'requirements.txt'
+     ```bash
+     pip install -r requirements.txt
+     ```
+  3. If you decide to add additional packages
+     ```bash
+     pip freeze > requirements.txt
+     ```
     
-    **By following these steps this should ensure that using this project is as painless as can be**
+   **By following these steps this should ensure that using this project is as painless as can be**
 </details>
